@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsGrid.Blazor", "Code\JsGrid.Blazor\JsGrid.Blazor.csproj", "{624D983C-2C2F-4738-8C5C-6968E8BFD9C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsGrid.Blazor.ComponentsLibrary", "Code\JsGrid.Blazor.ComponentsLibrary\JsGrid.Blazor.ComponentsLibrary.csproj", "{29CD3C56-578B-46FC-9CD2-C1A8C28862B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsGrid.Blazor.Contracts", "Code\JsGrid.Blazor.Contracts\JsGrid.Blazor.Contracts.csproj", "{426E6166-6164-4D83-BDB8-B80DAD380912}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsGrid.Blazor.Server", "Code\JsGrid.Blazor.Server\JsGrid.Blazor.Server.csproj", "{B1A8070B-B477-47E9-840B-16690C9DD4DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{624D983C-2C2F-4738-8C5C-6968E8BFD9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624D983C-2C2F-4738-8C5C-6968E8BFD9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624D983C-2C2F-4738-8C5C-6968E8BFD9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624D983C-2C2F-4738-8C5C-6968E8BFD9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29CD3C56-578B-46FC-9CD2-C1A8C28862B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29CD3C56-578B-46FC-9CD2-C1A8C28862B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29CD3C56-578B-46FC-9CD2-C1A8C28862B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29CD3C56-578B-46FC-9CD2-C1A8C28862B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{426E6166-6164-4D83-BDB8-B80DAD380912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{426E6166-6164-4D83-BDB8-B80DAD380912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{426E6166-6164-4D83-BDB8-B80DAD380912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{426E6166-6164-4D83-BDB8-B80DAD380912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1A8070B-B477-47E9-840B-16690C9DD4DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1A8070B-B477-47E9-840B-16690C9DD4DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1A8070B-B477-47E9-840B-16690C9DD4DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1A8070B-B477-47E9-840B-16690C9DD4DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6C61AA7-0FEC-4465-A0BB-566FCD30933C}
+	EndGlobalSection
+EndGlobal
