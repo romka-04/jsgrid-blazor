@@ -1,9 +1,57 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
-<h1>Hello, world!</h1>
+<h1>Static Data Example</h1>
 
-Welcome to your new app.
+<br />
 
-<br/>
+@if (_task.IsCompleted)
+{
+    <JsGridBlazor T="Client" Value="_gridClient"></JsGridBlazor>
+}
+else
+{
+    <text>Loading...</text>
+}
 
-<JsGridBlazor></JsGridBlazor>
+@code
+{
+    private readonly Client[] _clients = new[]
+    {
+        new Client("Otto Clay", 25, 1, "Ap #897-1459 Quam Avenue", false),
+        new Client("Connor Johnston", 45, 2, "Ap #370-4647 Dis Av.", true),
+        new Client("Lacey Hess", 29, 3, "Ap #365-8835 Integer St.", false),
+        new Client("Timothy Henson", 56, 1, "911-5143 Luctus Ave", true),
+        new Client("Ramona Benton", 32, 3, "Ap #614-689 Vehicula Street", false),
+    };
+
+    private readonly Country[] _countries = new[]
+    {
+        new Country(0, ""),
+        new Country(1, "United States"),
+        new Country(2, "Canada"),
+        new Country(3, "United Kingdom"),
+    };
+
+    private Task _task;
+    private IGridClient<Client> _gridClient;
+
+    public static Action<IGridFieldCollection<Client>> Fields = collection =>
+    {
+        collection.Add(x => x.Name);
+    };
+
+    protected override async Task OnParametersSetAsync()
+    {
+        //string url = NavigationManager.BaseUri + "api/SampleData/GetOrdersGridForSample";
+
+        //var query = new QueryDictionary<StringValues>();
+        //query.Add("grid-page", "2");
+
+        _gridClient = new GridClientBuilder<Client>(Fields)
+            .WithStaticData(_clients)
+            .Build();
+
+        await _task;
+    }
+}

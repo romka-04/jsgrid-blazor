@@ -19,7 +19,6 @@ window.jsGridWrapper = {
         if (!elem) {
             throw new Error('No element with ID ' + elementId);
         }
-        console.log('settings', settings);
         $(elem).jsGrid({
             width: "100%",
             height: "400px",

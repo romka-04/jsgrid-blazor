@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JsGrid.Blazor.ComponentsLibrary\JsGrid.Blazor.ComponentsLibrary.csproj" />
+    <ProjectReference Include="..\JsGrid.Blazor.Contracts\JsGrid.Blazor.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

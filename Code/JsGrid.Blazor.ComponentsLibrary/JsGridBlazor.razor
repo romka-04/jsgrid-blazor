@@ -1,10 +1,15 @@
 ﻿@using Microsoft.JSInterop
 @inject IJSRuntime js
+@typeparam T
+
 <div id="@_elementId"></div>
 
 @code
 {
     readonly string _elementId = $"map-{Guid.NewGuid():D}";
+
+    [Parameter]
+    public IGridClient<T> Value { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
