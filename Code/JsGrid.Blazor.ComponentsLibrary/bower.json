@@ -1,0 +1,15 @@
+{
+  "name": "jsgrid-blazor",
+  "description": "The Blazor Wrapper for jsGrid",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
