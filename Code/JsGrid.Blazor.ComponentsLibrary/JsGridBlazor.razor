@@ -1,0 +1,18 @@
+﻿@using Microsoft.JSInterop
+@inject IJSRuntime js
+<div id="@_elementId"></div>
+
+@code
+{
+    readonly string _elementId = $"map-{Guid.NewGuid():D}";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var settings = new JsGridSettings();
+
+            await js.InvokeAsync<object>("jsGridWrapper.init", _elementId, settings);
+        }
+    }
+}
