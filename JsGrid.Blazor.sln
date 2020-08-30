@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsGrid.Blazor.Contracts", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsGrid.Blazor.Server", "Code\JsGrid.Blazor.Server\JsGrid.Blazor.Server.csproj", "{B1A8070B-B477-47E9-840B-16690C9DD4DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsGrid.Blazor.ComponentsLibrary", "Code\JsGrid.Blazor.ComponentsLibrary\JsGrid.Blazor.ComponentsLibrary.csproj", "{0CEBE192-C9AD-44C4-BF92-1486207E7D10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JsGrid.Blazor.ComponentsLibrary", "Code\JsGrid.Blazor.ComponentsLibrary\JsGrid.Blazor.ComponentsLibrary.csproj", "{0CEBE192-C9AD-44C4-BF92-1486207E7D10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsGrid.Blazor.Tests", "Code\JsGrid.Blazor.Tests\JsGrid.Blazor.Tests.csproj", "{C42623F4-7BE4-4BFC-A524-C59A8BFD44BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0CEBE192-C9AD-44C4-BF92-1486207E7D10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CEBE192-C9AD-44C4-BF92-1486207E7D10}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CEBE192-C9AD-44C4-BF92-1486207E7D10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42623F4-7BE4-4BFC-A524-C59A8BFD44BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42623F4-7BE4-4BFC-A524-C59A8BFD44BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42623F4-7BE4-4BFC-A524-C59A8BFD44BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42623F4-7BE4-4BFC-A524-C59A8BFD44BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

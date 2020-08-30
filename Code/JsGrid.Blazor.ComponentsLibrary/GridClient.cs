@@ -1,8 +1,8 @@
 ﻿namespace JsGrid.Blazor.ComponentsLibrary
 {
-    public class GridClient
-        : IGridClient
+    class GridClient<T> 
+        : IGridClient<T>
     {
-        
+        public BaseField[] Fields { get; set; }
     }
 }

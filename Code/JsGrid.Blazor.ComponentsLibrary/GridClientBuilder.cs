@@ -1,25 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JsGrid.Blazor.ComponentsLibrary
 {
     public class GridClientBuilder<T>
     {
         private readonly IGridFieldCollection<T> _fields;
+        private readonly Action<IGridFieldCollection<T>> _fieldAction;
 
-        public GridClientBuilder(IGridFieldCollection<T> fields)
+        protected GridClientBuilder(IGridFieldCollection<T> fields)
         {
             _fields = fields ?? throw new ArgumentNullException(nameof(fields));
         }
         public GridClientBuilder(Action<IGridFieldCollection<T>> fieldAction)
         {
-            throw new NotImplementedException();
-            //_fields = fields ?? throw new ArgumentNullException(nameof(fields));
+            _fieldAction = fieldAction 
+                ?? throw new ArgumentNullException(nameof(fieldAction));
         }
 
         public IGridClient<T> Build()
         {
+            var gridClient = new GridClient<T>()
+            {
+                Fields = BuildFields()
+            };
+
             throw new NotImplementedException();
+        }
+
+        private BaseField[] BuildFields() => BuildFieldsEnumerable()?.ToArray();
+
+        private IEnumerable<BaseField> BuildFieldsEnumerable()
+        {
+            var collection = new GridFieldCollection<T>();
+            _fieldAction.Invoke(collection);
+            foreach (IGridField gridField in collection)
+            {
+                yield return gridField.BuildField();
+            }
         }
 
         public GridClientBuilder<T> WithStaticData(IEnumerable<T> data)
