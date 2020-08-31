@@ -1,25 +1,19 @@
 ﻿using System;
 using System.Reflection;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace JsGrid.Blazor.ComponentsLibrary.Serialization
 {
-    public sealed class JsonStringEnumMemberFactory
-        : JsonConverterFactory
+    public sealed class JsonEnumConverterAttribute
+        : JsonConverterAttribute
     {
-        public override bool CanConvert(Type typeToConvert)
-        {
-            return typeToConvert.IsEnum;
-        }
-
-        public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter CreateConverter(Type typeToConvert)
         {
             JsonConverter converter = (JsonConverter)Activator.CreateInstance(
                 typeof(JsonStringEnumMemberConverter<>).MakeGenericType(typeToConvert),
                 BindingFlags.Instance | BindingFlags.Public,
                 binder: null,
-                new object[] {},
+                new object[] { },
                 culture: null)!;
 
             return converter;

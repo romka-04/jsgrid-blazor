@@ -8,7 +8,7 @@ using System.Text.Json.Serialization;
 
 namespace JsGrid.Blazor.ComponentsLibrary.Serialization
 {
-    public class JsonStringEnumMemberConverter<T>
+    class JsonStringEnumMemberConverter<T>
         : JsonConverter<T>
     where T : struct, Enum
     {
@@ -21,7 +21,7 @@ namespace JsGrid.Blazor.ComponentsLibrary.Serialization
         private readonly ConcurrentDictionary<T, string>? _enumToStringCache;
         private readonly ConcurrentDictionary<ValueTuple<string?>, T>? _stringToEnumCache;
 
-        internal JsonStringEnumMemberConverter()
+        public JsonStringEnumMemberConverter()
         {
             _nameCache = new ConcurrentDictionary<string, string>();
             var enumType = typeof(T);
@@ -48,7 +48,29 @@ namespace JsGrid.Blazor.ComponentsLibrary.Serialization
 
         public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            throw new NotImplementedException();
+            JsonTokenType token = reader.TokenType;
+
+            if (token == JsonTokenType.String || token == JsonTokenType.Null)
+            {
+                // Try parsing case sensitive first
+                string? enumString = reader.GetString();
+                if (_stringToEnumCache != null && _stringToEnumCache.TryGetValue(ValueTuple.Create(enumString), out T value))
+                {
+                    return value;
+                }
+                else
+                {
+                    if (!Enum.TryParse(enumString, out value)
+                        && !Enum.TryParse(enumString, ignoreCase: true, out value))
+                    {
+                        throw new InvalidOperationException($"Unable to deserialize value '{enumString}'");
+                        return default;
+                    }
+                    return value;
+                }
+            }
+
+            return default;
         }
 
         public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
