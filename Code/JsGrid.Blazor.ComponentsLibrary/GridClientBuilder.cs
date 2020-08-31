@@ -21,12 +21,11 @@ namespace JsGrid.Blazor.ComponentsLibrary
 
         public IGridClient<T> Build()
         {
-            var gridClient = new GridClient<T>()
+            var gridClient = new GridClient<T>
             {
                 Fields = BuildFields()
             };
-
-            throw new NotImplementedException();
+            return gridClient;
         }
 
         private BaseField[] BuildFields() => BuildFieldsEnumerable()?.ToArray();

@@ -11,30 +11,31 @@ namespace JsGrid.Blazor.ComponentsLibrary
         /// <summary>
         ///     Add new field to the grid collection
         /// </summary>
-        void Add(IGridField column);
+        void Add(IGridField field);
 
-        /// <summary>
-        ///     Add new field to the grid collection
-        /// </summary>
-        /// <param name="constraint">Member of generic class</param>
-        void Add<TKey>(Expression<Func<T, TKey>> constraint);
+        ///// <summary>
+        /////     Add new field to the grid collection
+        ///// </summary>
+        ///// <param name="constraint">Member of generic class</param>
+        //void Add<TKey>(Expression<Func<T, TKey>> constraint);
 
-        /// <summary>
-        ///     Add new field to the grid collection
-        /// </summary>
-        /// <param name="constraint">Member of generic class</param>
-        /// <param name="columnName">Specify column internal static name, used for sorting and filtering</param>
-        void Add<TKey>(Expression<Func<T, TKey>> constraint, string columnName);
+        ///// <summary>
+        /////     Add new field to the grid collection
+        ///// </summary>
+        ///// <param name="constraint">Member of generic class</param>
+        ///// <param name="columnName">Specify field internal static name, used for sorting and filtering</param>
+        //void Add<TKey>(Expression<Func<T, TKey>> constraint, string columnName = null);
     }
 
     class GridFieldCollection<T> 
         : IGridFieldCollection<T>
     {
-        private readonly List<IGridField> _list;
+        private readonly List<IGridField> _list = new List<IGridField>();
 
-        public void Add(IGridField column)
+        public void Add(IGridField field)
         {
-            throw new NotImplementedException();
+            if (null == field) throw new ArgumentNullException(nameof(field));
+            _list.Add(field);
         }
 
         public void Add<TKey>(Expression<Func<T, TKey>> constraint)
@@ -44,29 +45,7 @@ namespace JsGrid.Blazor.ComponentsLibrary
 
         public void Add<TKey>(Expression<Func<T, TKey>> constraint, string columnName)
         {
-            var gridField = CastToGridField()
             throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Represents method for numeric types.
-        /// </summary>
-        /// <typeparam name="TKey"></typeparam>
-        /// <param name="constraint"></param>
-        /// <param name="columnName"></param>
-        private IGridField CastToGridField<TKey>(Expression<Func<T, TKey>> constraint, string columnName)
-            where TKey : struct,
-                IComparable,
-                IComparable<T>,
-                IConvertible,
-                IEquatable<T>,
-                IFormattable
-        {
-            return new TextGridField{ Name = columnName };
-        }
-        private IGridField CastToGridField(Expression<Func<T, string>> constraint, string columnName)
-        {
-            return new NumberGridFieldImpl{ Name = columnName };
         }
 
         public IEnumerator<IGridField> GetEnumerator()
@@ -87,24 +66,83 @@ namespace JsGrid.Blazor.ComponentsLibrary
     {
         public string Name { get; set; }
         public JsGridType Type { get; }
+        public int? Width { get; }
+
+        protected BaseGridField(string name, JsGridType type, int? width = null)
+        {
+            Name  = name;
+            Type  = type;
+            Width = width;
+        }
+
         public abstract BaseField BuildField();
     }
 
-    class NumberGridFieldImpl
+    class NumberGridField
         : BaseGridField
     {
+        /// <summary>
+        /// uses sorter for numbers
+        /// </summary>
+        public SortingEnum Sorter { get; set; }
+        /// <summary>
+        /// text alignment
+        /// </summary>
+        public AlignEnum Align { get; set; }
+        /// <summary>
+        /// a boolean defines whether input is readonly (added in 'js-grid' v1.4)
+        /// </summary>
+        public bool ReadOnly { get; set; }
+
+        public NumberGridField(string name, bool readOnly, int? width, SortingEnum sorter, AlignEnum align)
+            : base(name, JsGridType.Number, width)
+        {
+            ReadOnly = readOnly;
+            Sorter   = sorter;
+            Align    = align;
+        }
+
         public override BaseField BuildField()
         {
-            return new NumberField();
+            return new NumberField
+            {
+                Name     = this.Name,
+                ReadOnly = this.ReadOnly,
+                Width    = this.Width, 
+                Sorter   = this.Sorter,
+                Align    = this.Align
+            };
         }
     }
 
     class TextGridField
         : BaseGridField
     {
+        /// <summary>
+        /// triggers searching when the user presses `enter` key in the filter input
+        /// </summary>
+        public bool AutoSearch { get; set; }
+        /// <summary>
+        /// a boolean defines whether input is readonly (added in 'js-grid' v1.4)
+        /// </summary>
+        public bool ReadOnly { get; set; }
+
+        public TextGridField(string name, bool autoSearch, bool readOnly, int? width)
+            : base(name, JsGridType.Text, width)
+        {
+            AutoSearch = autoSearch;
+            ReadOnly   = readOnly;
+        }
+
         public override BaseField BuildField()
         {
-            return new TextField();
+            return new TextField
+            {
+                Name       = this.Name,
+                ReadOnly   = this.ReadOnly,
+                AutoSearch = this.AutoSearch,
+                Width      = this.Width 
+            };
         }
     }
 }

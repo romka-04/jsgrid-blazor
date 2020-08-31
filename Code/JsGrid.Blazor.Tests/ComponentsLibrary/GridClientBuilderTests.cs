@@ -8,13 +8,15 @@ namespace JsGrid.Blazor.ComponentsLibrary
     public class GridClientBuilderTests
     {
         [Test]
-        public void Build()
+        public void Build_Fields_should_choose_proper_grid_field_types()
         {
             // arrange
             Action<IGridFieldCollection<TestClass>> fieldsDeclaration = collection =>
             {
                 collection.Add(x => x.Name);
+                collection.Add(x => x.Name, "Last Name", readOnly: true, width: 150, autoSearch: true);
                 collection.Add(x => x.Id);
+                collection.Add(x => x.Id, "Test ID", readOnly: true, 150, SortingEnum.Number, AlignEnum.Right );
             };
             var sut = _fixture.CreateSut(fieldsDeclaration);
             // act
@@ -22,8 +24,10 @@ namespace JsGrid.Blazor.ComponentsLibrary
             // assert
             var expected = new BaseField[]
             {
-                new TextField{},
-                new NumberField(), 
+                new TextField{ Name = "Name", AutoSearch = false, ReadOnly = false },
+                new TextField{ Name = "Last Name", AutoSearch = true, ReadOnly = true, Width = 150 },
+                new NumberField{ Name = "Id" }, 
+                new NumberField{ Name = "Test ID", ReadOnly = true, Sorter = SortingEnum.Number, Align = AlignEnum.Right, Width = 150 }, 
             };
             actual.Fields.Should().BeEquivalentTo(expected);
         }
