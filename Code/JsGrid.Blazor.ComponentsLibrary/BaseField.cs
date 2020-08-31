@@ -37,27 +37,27 @@ namespace JsGrid.Blazor.ComponentsLibrary
         /// <summary>
         /// string sorter.
         /// </summary>
-        [JsonValue("string")]
+        [JsonStringEnumMember("string")]
         String,
         /// <summary>
         /// Number sorter.
         /// </summary>
-        [JsonValue("number")]
+        [JsonStringEnumMember("number")]
         Number,
         /// <summary>
         /// Date sorter.
         /// </summary>
-        [JsonValue("date")]
+        [JsonStringEnumMember("date")]
         Date,
         /// <summary>
         /// Numbers are parsed before comparison.
         /// </summary>
-        [JsonValue("numberAsString")]
+        [JsonStringEnumMember("numberAsString")]
         NumberAsString,
         /// <summary>
         /// Custom sorting strategy.
         /// </summary>
-        [JsonValue("custom")]
+        [JsonStringEnumMember("custom")]
         Custom
     }
 
