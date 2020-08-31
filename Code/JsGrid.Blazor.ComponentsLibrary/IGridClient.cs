@@ -2,6 +2,7 @@
 {
     public interface IGridClient<T>
     {
-        BaseField[] Fields { get; set; }
+        BaseField[] Fields { get; }
+        object Data { get; }
     }
 }

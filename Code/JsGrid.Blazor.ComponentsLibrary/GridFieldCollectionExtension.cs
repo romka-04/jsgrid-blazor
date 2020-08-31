@@ -34,6 +34,36 @@ namespace JsGrid.Blazor.ComponentsLibrary
                 align:    align);
 
             collection.Add(gridField);
+            collection.AddExpression(constraint, columnName);
+        }
+
+        /// <summary>
+        /// Adds numerical grid fields into the grid collection.
+        /// </summary>
+        /// <typeparam name="T">The collection type.</typeparam>
+        /// <typeparam name="TKey">The type of the field. Should be numeric only.</typeparam>
+        /// <param name="collection">The collection to add a field.</param>
+        /// <param name="constraint">The expressions that define the field.</param>
+        /// <param name="columnName">The grid column name. Optional value.</param>
+        /// <param name="readOnly">Defines whether input is readonly.</param>
+        /// <param name="width">Column width. Default value is 50.</param>
+        /// <param name="sorter">Column sorter.</param>
+        /// <param name="align">Text align.</param>
+        public static void Add<T>(this IGridFieldCollection<T> collection, Expression<Func<T, bool>> constraint,
+                string columnName = null, bool readOnly = false, int? width = null, 
+                SortingEnum sorter = SortingEnum.String, AlignEnum align = AlignEnum.None )
+        {
+            columnName ??= GetColumnName(constraint);
+
+            var gridField = new CheckboxGridField(
+                name:     columnName,
+                readOnly: readOnly,
+                width:    width,
+                align:    align
+            );
+
+            collection.Add(gridField);
+            collection.AddExpression(constraint, columnName);
         }
 
         /// <summary>
@@ -62,6 +92,12 @@ namespace JsGrid.Blazor.ComponentsLibrary
             );
 
             collection.Add(gridField);
+            collection.AddExpression(constraint, columnName);
+        }
+
+        public static void AddControl<T>(this IGridFieldCollection<T> collection)
+        {
+            // TODO: Implement this code.
         }
 
         private static string GetColumnName<T, TKey>(Expression<Func<T, TKey>> constraint)

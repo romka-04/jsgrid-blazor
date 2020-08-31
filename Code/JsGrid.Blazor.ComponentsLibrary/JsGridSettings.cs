@@ -6,5 +6,8 @@
         public bool Editing { get; set; }
         public bool Sorting { get; set; }
         public bool Paging { get; set; }
+
+        public object Data { get; set; }
+        public object Fields { get; set; }
     }
 }

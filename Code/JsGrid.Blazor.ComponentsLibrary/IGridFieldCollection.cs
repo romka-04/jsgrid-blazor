@@ -8,10 +8,15 @@ namespace JsGrid.Blazor.ComponentsLibrary
     public interface IGridFieldCollection<T>
         : IEnumerable<IGridField>
     {
+        IEnumerable<Func<T, object>> GetterList { get; }
+        //IEnumerable<ObjectProxy<T>> FieldProxies { get; }
+
         /// <summary>
         ///     Add new field to the grid collection
         /// </summary>
         void Add(IGridField field);
+
+        void AddExpression<TKey>(Expression<Func<T, TKey>> constraint, string name);
 
         ///// <summary>
         /////     Add new field to the grid collection
@@ -31,6 +36,10 @@ namespace JsGrid.Blazor.ComponentsLibrary
         : IGridFieldCollection<T>
     {
         private readonly List<IGridField> _list = new List<IGridField>();
+        private readonly List<Func<T, object>> _getterList = new List<Func<T, object>>();
+        private readonly List<ObjectProxy<T>> _objectProxies = new List<ObjectProxy<T>>();
+
+        public IEnumerable<ObjectProxy<T>> FieldProxies => _objectProxies;
 
         public void Add(IGridField field)
         {
@@ -38,15 +47,14 @@ namespace JsGrid.Blazor.ComponentsLibrary
             _list.Add(field);
         }
 
-        public void Add<TKey>(Expression<Func<T, TKey>> constraint)
+        public void AddExpression<TKey>(Expression<Func<T, TKey>> constraint, string name)
         {
-            throw new NotImplementedException();
+            var objProxy = ObjectProxy<T>.CreateFrom(constraint, name);
+            _objectProxies.Add(objProxy);
+           
         }
 
-        public void Add<TKey>(Expression<Func<T, TKey>> constraint, string columnName)
-        {
-            throw new NotImplementedException();
-        }
+        public IEnumerable<Func<T, object>> GetterList => _getterList;
 
         public IEnumerator<IGridField> GetEnumerator()
             => _list.GetEnumerator();
@@ -127,7 +135,7 @@ namespace JsGrid.Blazor.ComponentsLibrary
         /// </summary>
         public bool ReadOnly { get; set; }
 
-        public TextGridField(string name, bool autoSearch, bool readOnly, int? width)
+        public TextGridField(string name, bool readOnly, int? width, bool autoSearch)
             : base(name, JsGridType.Text, width)
         {
             AutoSearch = autoSearch;
@@ -142,6 +150,37 @@ namespace JsGrid.Blazor.ComponentsLibrary
                 ReadOnly   = this.ReadOnly,
                 AutoSearch = this.AutoSearch,
                 Width      = this.Width 
+            };
+        }
+    }
+
+    class CheckboxGridField
+        : BaseGridField
+    {
+        /// <summary>
+        /// text alignment
+        /// </summary>
+        public AlignEnum Align { get; set; }
+        /// <summary>
+        /// a boolean defines whether input is readonly (added in 'js-grid' v1.4)
+        /// </summary>
+        public bool ReadOnly { get; set; }
+
+        public CheckboxGridField(string name, bool readOnly, int? width, AlignEnum align)
+            : base(name, JsGridType.Checkbox, width)
+        {
+            ReadOnly = readOnly;
+            Align    = align;
+        }
+
+        public override BaseField BuildField()
+        {
+            return new CheckboxField
+            {
+                Name     = this.Name,
+                ReadOnly = this.ReadOnly,
+                Width    = this.Width,
+                Align    = this.Align
             };
         }
     }

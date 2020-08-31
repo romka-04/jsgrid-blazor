@@ -36,9 +36,13 @@ else
     private Task _task;
     private IGridClient<Client> _gridClient;
 
-    public static Action<IGridFieldCollection<Client>> Fields = collection =>
+    public static Action<IGridFieldCollection<Client>> Fields = c =>
     {
-        collection.Add(x => x.Name);
+        c.Add(x => x.Name, width: 150);
+        c.Add(x => x.Age, width: 50);
+        c.Add(x => x.Address, width: 200);
+        c.Add(x => x.Married, "Is Married" );
+        c.AddControl();
     };
 
     protected override async Task OnParametersSetAsync()
@@ -51,7 +55,7 @@ else
         _gridClient = new GridClientBuilder<Client>(Fields)
             .WithStaticData(_clients)
             .Build();
-
+        _task = Task.CompletedTask;
         await _task;
     }
 }

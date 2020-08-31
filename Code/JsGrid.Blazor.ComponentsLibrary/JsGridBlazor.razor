@@ -15,7 +15,11 @@
     {
         if (firstRender)
         {
-            var settings = new JsGridSettings();
+            var settings = new JsGridSettings
+            {
+                Data = Value.Data,
+                Fields = Value.Fields
+            };
 
             await js.InvokeAsync<object>("jsGridWrapper.init", _elementId, settings);
         }
