@@ -4,24 +4,33 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0-alpha</Version>
+    <Version>1.0.0-alpha2</Version>
     <Authors>Roman Chernobrovkin</Authors>
     <Company />
     <Product>JsGrid.Blazor</Product>
     <Description>Blazor Component wrapper for jsGrid (Lightweight Grid jQuery Plugin)</Description>
-    <Copyright>MIT</Copyright>
+    <Copyright></Copyright>
     <PackageProjectUrl>https://github.com/romka-04/jsgrid-blazor</PackageProjectUrl>
     <RepositoryUrl>https://github.com/romka-04/jsgrid-blazor</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>jsgrid;grid;blazor</PackageTags>
     <PackageReleaseNotes>MVP1 - only basic functionality is available.</PackageReleaseNotes>
-    <FileVersion>1.0.0.1</FileVersion>
+    <FileVersion>1.0.0.2</FileVersion>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components" Version="3.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.1.7" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
