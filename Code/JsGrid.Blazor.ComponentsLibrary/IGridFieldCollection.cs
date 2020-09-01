@@ -19,8 +19,6 @@ namespace JsGrid.Blazor.ComponentsLibrary
 
     public interface IGridField
     {
-        public string Name { get; }
-        public string Title { get; }
         public JsGridType Type { get; }
     }
 
@@ -117,6 +115,20 @@ namespace JsGrid.Blazor.ComponentsLibrary
         {
             ReadOnly = readOnly;
             Align    = align;
+        }
+    }
+
+    class ControlGridField
+        : IGridField
+    {
+        /// <summary>
+        /// Column type. Defines the way to render the column.
+        /// </summary>
+        public JsGridType Type { get; }
+
+        public ControlGridField()
+        {
+            this.Type = JsGridType.Control;
         }
     }
 }

@@ -100,9 +100,16 @@ namespace JsGrid.Blazor.ComponentsLibrary
             collection.AddExpression(constraint, name);
         }
 
+        /// <summary>
+        /// Adds control grid fields into the grid collection.
+        /// </summary>
+        /// <typeparam name="T">The collection type.</typeparam>
+        /// <param name="collection">The collection to add a field.</param>
         public static void AddControl<T>(this IGridFieldCollection<T> collection)
         {
-            // TODO: Implement this code.
+            var gridField = new ControlGridField();
+
+            collection.Add(gridField);
         }
 
         private static string GetPropertyName<T, TKey>(Expression<Func<T, TKey>> constraint)
