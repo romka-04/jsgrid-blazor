@@ -7,7 +7,7 @@
 
 @if (_task.IsCompleted)
 {
-    <JsGridBlazor T="Client" Value="_gridClient" RowClick="WriteLine"></JsGridBlazor>
+    <JsGridBlazor T="Client" Value="_gridClient" RowClick="RowClick" RowDoubleClick="RowDoubleClick"></JsGridBlazor>
 }
 else
 {
@@ -56,8 +56,13 @@ else
         await _task;
     }
 
-    private void WriteLine(RowEventArgs args)
+    private void RowClick(RowEventArgs args)
     {
-        Console.WriteLine($"Write Line: RowIndex={args.ItemIndex}; Item={args.Item}");
+        Console.WriteLine($"Row Click: RowIndex={args.ItemIndex}; Item={args.Item}");
+    }
+    
+    private void RowDoubleClick(RowEventArgs args)
+    {
+        Console.WriteLine($"Row Double Click: RowIndex={args.ItemIndex}; Item={args.Item}");
     }
 }

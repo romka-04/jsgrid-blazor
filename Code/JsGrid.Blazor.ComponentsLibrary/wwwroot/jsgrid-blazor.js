@@ -19,20 +19,20 @@ window.jsGridWrapper = {
             fields: settings.fields,
 
             // callbacks
-            onItemEditing: function () {
-                console.log('onItemEditing');
-            },
-            onItemInserted: function () {
-                console.log('onItemInserted');
-            },
-            onItemUpdating: function () {
-                console.log('onItemUpdating');
-            },
+            //onItemEditing: function () {
+            //    console.log('onItemEditing');
+            //},
+            //onItemInserted: function () {
+            //    console.log('onItemInserted');
+            //},
+            //onItemUpdating: function () {
+            //    console.log('onItemUpdating');
+            //},
             rowClick: function (args) {
                 dotnetHelper.invokeMethodAsync('RowClickAsync', args.item, args.itemIndex);
             },
             rowDoubleClick: function(args) {
-                console.log('rowDoubleClick');
+                dotnetHelper.invokeMethodAsync('RowDoubleClickAsync', args.item, args.itemIndex);
             }
         });
     }

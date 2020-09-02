@@ -10,6 +10,8 @@
 
     [Parameter]
     public EventCallback<RowEventArgs> RowClick { get; set; }
+    [Parameter]
+    public EventCallback<RowEventArgs> RowDoubleClick { get; set; }
 
     [Parameter]
     public IGridClient<T> Value { get; set; }
@@ -28,5 +30,11 @@
     public async Task RowClickAsync(object item, int itemIndex)
     {
         await RowClick.InvokeAsync(new RowEventArgs(itemIndex, item));
+    }
+    
+    [JSInvokable]
+    public async Task RowDoubleClickAsync(object item, int itemIndex)
+    {
+        await RowDoubleClick.InvokeAsync(new RowEventArgs(itemIndex, item));
     }
 }
