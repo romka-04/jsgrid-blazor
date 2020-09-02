@@ -19,15 +19,19 @@ window.jsGridWrapper = {
             fields: settings.fields,
 
             // callbacks
-            //onItemEditing: function () {
-            //    console.log('onItemEditing');
-            //},
-            //onItemInserted: function () {
-            //    console.log('onItemInserted');
-            //},
-            //onItemUpdating: function () {
-            //    console.log('onItemUpdating');
-            //},
+            onItemEditing: function (args) {
+                var cancel = dotnetHelper.invokeMethod('OnItemEditingSync',
+                    args.item,
+                    args.itemIndex,
+                    args.previousItem);
+                args.cancel = cancel;
+            },
+            onItemInserted: function () {
+                console.log('onItemInserted');
+            },
+            onItemUpdating: function () {
+                console.log('onItemUpdating');
+            },
             rowClick: function (args) {
                 dotnetHelper.invokeMethodAsync('RowClickAsync', args.item, args.itemIndex);
             },

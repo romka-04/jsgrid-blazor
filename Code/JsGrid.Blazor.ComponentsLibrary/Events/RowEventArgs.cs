@@ -1,4 +1,4 @@
-﻿namespace JsGrid.Blazor.ComponentsLibrary
+﻿namespace JsGrid.Blazor.ComponentsLibrary.Events
 {
     public class RowEventArgs
     {
