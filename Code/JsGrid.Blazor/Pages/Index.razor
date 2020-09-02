@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using JsGrid.Blazor.ComponentsLibrary.Events
 @inject NavigationManager NavigationManager
 
 <h1>Static Data Example</h1>
@@ -7,7 +8,12 @@
 
 @if (_task.IsCompleted)
 {
-    <JsGridBlazor T="Client" Value="_gridClient"></JsGridBlazor>
+    <JsGridBlazor T="Client"
+                  Value="_gridClient"
+                  RowClick="RowClick"
+                  RowDoubleClick="RowDoubleClick"
+                  OnItemEditing="OnItemEditing">
+    </JsGridBlazor>
 }
 else
 {
@@ -41,17 +47,34 @@ else
         c.Add(x => x.Name, width: 150);
         c.Add(x => x.Age, width: 50);
         c.Add(x => x.Address, width: 200);
-        c.Add(x => x.Married, "Is Married" );
-        c.AddControl();
+        c.Add(x => x.Married, "Is Married", true, 50);
+        c.AddControl(width: 50, editing: true);
     };
 
     protected override async Task OnParametersSetAsync()
     {
         _gridClient = new GridClientBuilder<Client>(Fields)
             .WithStaticData(_clients)
+            .WithSettings(editing: true)
             .WithDimensions("100%", "500px")
             .Build();
         _task = Task.CompletedTask;
         await _task;
+    }
+
+    private void RowClick(RowEventArgs args)
+    {
+        Console.WriteLine($"Row Click: RowIndex={args.ItemIndex}; Item={args.Item}");
+    }
+
+    private void RowDoubleClick(RowEventArgs args)
+    {
+        Console.WriteLine($"Row Double Click: RowIndex={args.ItemIndex}; Item={args.Item}");
+    }
+
+    private void OnItemEditing(ItemUpdatingEventArgs args)
+    {
+        //args.CancelUpdate();
+        Console.WriteLine($"On Item Editing: RowIndex={args.ItemIndex}; Item={args.Item}");
     }
 }

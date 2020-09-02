@@ -6,12 +6,11 @@ namespace JsGrid.Blazor.ComponentsLibrary
     public enum AlignEnum 
         : byte
     {
-        None,
+        [JsonStringEnumMember("center")]
+        Center,
         [JsonStringEnumMember("right")]
         Right,
         [JsonStringEnumMember("left")]
         Left,
-        [JsonStringEnumMember("center")]
-        Center
     }
 }

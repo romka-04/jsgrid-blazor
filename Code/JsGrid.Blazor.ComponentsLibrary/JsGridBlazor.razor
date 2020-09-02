@@ -1,4 +1,5 @@
 ﻿@using Microsoft.JSInterop
+@using JsGrid.Blazor.ComponentsLibrary.Events
 @inject IJSRuntime js
 @typeparam T
 
@@ -9,13 +10,51 @@
     readonly string _elementId = $"map-{Guid.NewGuid():D}";
 
     [Parameter]
+    public EventCallback<RowEventArgs> RowClick { get; set; }
+    [Parameter]
+    public EventCallback<RowEventArgs> RowDoubleClick { get; set; }
+    [Parameter]
+    public EventCallback<ItemUpdatingEventArgs> OnItemEditing { get; set; }
+
+    [Parameter]
     public IGridClient<T> Value { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await js.InvokeAsync<object>("jsGridWrapper.init", _elementId, Value.Settings);
+            await js.InvokeAsync<object>(
+                "jsGridWrapper.init",
+                _elementId, Value.Settings, DotNetObjectReference.Create(this));
         }
+    }
+
+    [JSInvokable]
+    public async Task RowClickAsync(object item, int itemIndex)
+    {
+        await RowClick.InvokeAsync(new RowEventArgs(itemIndex, item));
+    }
+    
+    [JSInvokable]
+    public async Task RowDoubleClickAsync(object item, int itemIndex)
+    {
+        await RowDoubleClick.InvokeAsync(new RowEventArgs(itemIndex, item));
+    }
+    
+    [JSInvokable]
+    public async Task<bool> OnItemEditingAsync(object item, int itemIndex, object previousItem)
+    {
+        var eventArgs = new ItemUpdatingEventArgs(itemIndex, item, previousItem);
+        await OnItemEditing.InvokeAsync(eventArgs);
+        return eventArgs.Cancel;
+    }
+    
+    [JSInvokable]
+    public bool OnItemEditingSync(object item, int itemIndex, object previousItem)
+    {
+        var eventArgs = new ItemUpdatingEventArgs(itemIndex, item, previousItem);
+        var task = this.OnItemEditing.InvokeAsync(eventArgs);
+        Task.WaitAll(task);
+        return eventArgs.Cancel;
     }
 }

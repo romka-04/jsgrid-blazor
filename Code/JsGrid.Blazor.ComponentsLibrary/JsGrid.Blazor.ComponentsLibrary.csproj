@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.0</Version>
+    <Version>1.0.1-alpha</Version>
     <Authors>Roman Chernobrovkin</Authors>
     <Company />
     <Product>JsGrid.Blazor</Product>
@@ -14,10 +14,19 @@
     <RepositoryUrl>https://github.com/romka-04/jsgrid-blazor</RepositoryUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>jsgrid;grid;blazor</PackageTags>
-    <PackageReleaseNotes>MVP1 - only basic functionality is available.</PackageReleaseNotes>
-    <FileVersion>1.0.0.3</FileVersion>
+    <PackageReleaseNotes>- add several grid events such as OnRowClick, OnItemUpdating etc;
+- minor bugfixes</PackageReleaseNotes>
+    <FileVersion>1.0.1.1</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="bundleconfig.json" />
+  </ItemGroup>
 
 
   <ItemGroup>
@@ -31,6 +40,7 @@
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
 </Project>

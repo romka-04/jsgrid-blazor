@@ -7,7 +7,7 @@
         public bool Sorting { get; set; }
         public bool Paging { get; set; }
 
-        public IGridField[] Fields { get; set; }
+        public object[] Fields { get; set; }
         public object Data { get; set; }
 
         public string Width { get; set; }
