@@ -6,7 +6,7 @@ It supports .NET Core 3.1 and Blazor WebAssembly 3.2.0
 ## Install
 
 ```<language>
-nuget install JsGrid.Blazor
+nuget install JsGrid.Blazor.ComponentsLibrary
 ```
 
 ## Getting Started
@@ -24,7 +24,7 @@ nuget install JsGrid.Blazor
 <link href="_content/JsGrid.Blazor.ComponentsLibrary/jsgrid-theme.min.css" rel="stylesheet" />
 ...
 <script src="_content/JsGrid.Blazor.ComponentsLibrary/jsgrid.min.js"></script>
-<script src="_content/JsGrid.Blazor.ComponentsLibrary/jsgrid-blazor.js"></script>
+<script src="_content/JsGrid.Blazor.ComponentsLibrary/jsgrid-blazor.min.js"></script>
 ```
 
 3. Include JsGrid.Blazor namespace into file _Imports.razor.
@@ -37,7 +37,6 @@ nuget install JsGrid.Blazor
 
 ```razor
 @page "/"
-@inject NavigationManager NavigationManager
 
 @if (_task.IsCompleted)
 {
@@ -93,6 +92,7 @@ else
 
 ## ToDo list
 
-1. Implement other grid fields such as **select**, **textarea** and **control**.
-2. Implement code that requests data from OData service with ajax. Add backend support of this functionality if needed.
-3. Repeat all Demos at the jsGrid website. 
+1. Add more examples of usage grid events and etc.
+2. Implement other grid fields such as **select**, **textarea**.
+3. Implement code that requests data from OData service with ajax. Add backend support of this functionality if needed.
+4. Repeat all Demos at the jsGrid website. 
