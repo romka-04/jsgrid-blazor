@@ -41,8 +41,8 @@ else
         c.Add(x => x.Name, width: 150);
         c.Add(x => x.Age, width: 50);
         c.Add(x => x.Address, width: 200);
-        c.Add(x => x.Married, "Is Married" );
-        c.AddControl();
+        c.Add(x => x.Married, "Is Married", true, 50);
+        c.AddControl(width: 50);
     };
 
     protected override async Task OnParametersSetAsync()

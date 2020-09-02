@@ -19,7 +19,7 @@ namespace JsGrid.Blazor.ComponentsLibrary
         /// <param name="align">Text align.</param>
         public static void Add<T, TKey>(this IGridFieldCollection<T> collection, Expression<Func<T, TKey>> constraint,
                 string title = null, bool readOnly = false, int? width = null, 
-                SortingEnum sorter = SortingEnum.String, AlignEnum align = AlignEnum.None )
+                SortingEnum sorter = default, AlignEnum align = default)
             where TKey : struct, IComparable
         {
             if (null == collection) throw new ArgumentNullException(nameof(collection));
@@ -52,7 +52,7 @@ namespace JsGrid.Blazor.ComponentsLibrary
         /// <param name="align">Text align.</param>
         public static void Add<T>(this IGridFieldCollection<T> collection, Expression<Func<T, bool>> constraint,
                 string title = null, bool readOnly = false, int? width = null, 
-                SortingEnum sorter = SortingEnum.String, AlignEnum align = AlignEnum.None )
+                SortingEnum sorter = default, AlignEnum align = default)
         {
             // name of the field to get value in json object
             var name = GetPropertyName(constraint);
@@ -105,9 +105,34 @@ namespace JsGrid.Blazor.ComponentsLibrary
         /// </summary>
         /// <typeparam name="T">The collection type.</typeparam>
         /// <param name="collection">The collection to add a field.</param>
-        public static void AddControl<T>(this IGridFieldCollection<T> collection)
+        /// <param name="editButton">show/hide edit button</param>
+        /// <param name="deleteButton">show/hide delete button</param>
+        /// <param name="clearFilterButton">show/hide clear filter button</param>
+        /// <param name="modeSwitchButton">show/hide switching filtering/inserting button</param>
+        /// <param name="align">content alignment</param>
+        /// <param name="width">column width</param>
+        /// <param name="filtering">disable/enable filtering for column</param>
+        /// <param name="inserting">disable/enable inserting for column</param>
+        /// <param name="editing">disable/enable editing for column</param>
+        /// <param name="sorting">disable/enable sorting for column</param>
+        public static void AddControl<T>(this IGridFieldCollection<T> collection, bool editButton = true,
+            bool deleteButton = true, bool clearFilterButton = true, bool modeSwitchButton = true, 
+            AlignEnum align = default, int? width = null, 
+            bool filtering = false, bool inserting = false, bool editing = false, bool sorting = false
+            )
         {
-            var gridField = new ControlGridField();
+            var gridField = new ControlGridField(
+                editButton,
+                deleteButton,
+                clearFilterButton,
+                modeSwitchButton,
+                align,
+                width,
+                filtering,
+                inserting,
+                editing,
+                sorting
+                );
 
             collection.Add(gridField);
         }

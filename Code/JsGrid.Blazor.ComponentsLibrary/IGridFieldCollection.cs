@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text.Json.Serialization;
 
 namespace JsGrid.Blazor.ComponentsLibrary
 {
@@ -122,13 +123,62 @@ namespace JsGrid.Blazor.ComponentsLibrary
         : IGridField
     {
         /// <summary>
-        /// Column type. Defines the way to render the column.
+        /// show/hide edit button
         /// </summary>
-        public JsGridType Type { get; }
+        public bool EditButton { get; set; }
+        /// <summary>
+        /// show/hide delete button
+        /// </summary>
+        public bool DeleteButton { get; set; }
+        /// <summary>
+        /// show/hide clear filter button
+        /// </summary>
+        public bool ClearFilterButton { get; set; }
+        /// <summary>
+        /// show/hide switching filtering/inserting button
+        /// </summary>
+        public bool ModeSwitchButton { get; set; }
+        /// <summary>
+        /// content alignment
+        /// </summary>
+        public AlignEnum Align { get; set; }
+        /// <summary>
+        /// column width
+        /// </summary>
+        public int? Width { get; set; }
+        /// <summary>
+        /// disable/enable filtering for column
+        /// </summary>
+        public bool Filtering { get; set; }
+        /// <summary>
+        /// disable/enable inserting for column
+        /// </summary>
+        public bool Inserting { get; set; }
+        /// <summary>
+        /// disable/enable editing for column
+        /// </summary>
+        public bool Editing { get; set; }
+        /// <summary>
+        /// disable/enable sorting for column
+        /// </summary>
+        public bool Sorting { get; set; }
 
-        public ControlGridField()
+        public JsGridType Type { get; } = JsGridType.Control;
+
+        public ControlGridField(bool editButton, bool deleteButton, bool clearFilterButton, bool modeSwitchButton,
+            AlignEnum align, int? width, 
+            bool filtering, bool inserting, bool editing, bool sorting)
         {
-            this.Type = JsGridType.Control;
+            EditButton = editButton;
+            DeleteButton = deleteButton;
+            ClearFilterButton = clearFilterButton;
+            ModeSwitchButton = modeSwitchButton;
+            Align = align;
+            Width = width;
+            Filtering = filtering;
+            Inserting = inserting;
+            Editing = editing;
+            Sorting = sorting;
         }
     }
 }

@@ -32,9 +32,9 @@ namespace JsGrid.Blazor.ComponentsLibrary
             {
                 new TextGridField("Name", null, false, null, false),
                 new TextGridField("Name", "Last Name", true, 150, true),
-                new NumberGridField("Id", null, false, null, SortingEnum.String, AlignEnum.None),
+                new NumberGridField("Id", null, false, null, SortingEnum.String, AlignEnum.Center),
                 new NumberGridField("Id", "Test ID", true, 150, SortingEnum.Number, AlignEnum.Right),
-                new CheckboxGridField("IsEnabled", null, false, null, AlignEnum.None),
+                new CheckboxGridField("IsEnabled", null, false, null, AlignEnum.Center),
                 new CheckboxGridField("IsEnabled", "Is Enabled", true, 125, AlignEnum.Right),
             };
             actual.Settings.Fields.Should().BeEquivalentTo(expected);
