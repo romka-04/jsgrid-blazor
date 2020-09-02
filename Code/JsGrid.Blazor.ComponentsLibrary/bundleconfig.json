@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/jsgrid-blazor.min.js",
+    "inputFiles": [
+      "wwwroot/jsgrid-blazor.js"
+    ]
+  }
+]
