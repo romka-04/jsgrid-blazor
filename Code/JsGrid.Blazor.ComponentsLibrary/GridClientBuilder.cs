@@ -12,6 +12,10 @@ namespace JsGrid.Blazor.ComponentsLibrary
 
         private string _width = "100%";
         private string _height= "400px";
+        private bool _inserting;
+        private bool _editing;
+        private bool _sorting;
+        private bool _paging;
 
         internal GridClientBuilder(GridFieldCollection<T> fields)
         {
@@ -33,6 +37,10 @@ namespace JsGrid.Blazor.ComponentsLibrary
         {
             var settings = new JsGridSettings
             {
+                Inserting = _inserting,
+                Editing = _editing,
+                Sorting = _sorting,
+                Paging = _paging,
                 Fields = _fields.ToArray(),
                 Data   = BuildData(),
                 Width  = _width,
@@ -74,6 +82,7 @@ namespace JsGrid.Blazor.ComponentsLibrary
         public GridClientBuilder<T> WithStaticData(IEnumerable<T> data)
         {
             _data.AddRange(data);
+            
             return this;
         }
 
@@ -81,6 +90,18 @@ namespace JsGrid.Blazor.ComponentsLibrary
         {
             _width  = width;
             _height = height;
+            
+            return this;
+        }
+        
+        public GridClientBuilder<T> WithSettings(bool inserting = default, bool editing = default,
+            bool sorting = default, bool paging = default)
+        {
+            _inserting = inserting;
+            _editing = editing;
+            _sorting = sorting;
+            _paging = paging;
+
             return this;
         }
     }

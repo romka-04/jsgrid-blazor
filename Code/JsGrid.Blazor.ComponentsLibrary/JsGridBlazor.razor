@@ -9,13 +9,24 @@
     readonly string _elementId = $"map-{Guid.NewGuid():D}";
 
     [Parameter]
+    public EventCallback<RowEventArgs> RowClick { get; set; }
+
+    [Parameter]
     public IGridClient<T> Value { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await js.InvokeAsync<object>("jsGridWrapper.init", _elementId, Value.Settings);
+            await js.InvokeAsync<object>(
+                "jsGridWrapper.init",
+                _elementId, Value.Settings, DotNetObjectReference.Create(this));
         }
+    }
+
+    [JSInvokable]
+    public async Task RowClickAsync(object item, int itemIndex)
+    {
+        await RowClick.InvokeAsync(new RowEventArgs(itemIndex, item));
     }
 }

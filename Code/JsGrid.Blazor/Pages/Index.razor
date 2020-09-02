@@ -7,7 +7,7 @@
 
 @if (_task.IsCompleted)
 {
-    <JsGridBlazor T="Client" Value="_gridClient"></JsGridBlazor>
+    <JsGridBlazor T="Client" Value="_gridClient" RowClick="WriteLine"></JsGridBlazor>
 }
 else
 {
@@ -42,16 +42,22 @@ else
         c.Add(x => x.Age, width: 50);
         c.Add(x => x.Address, width: 200);
         c.Add(x => x.Married, "Is Married", true, 50);
-        c.AddControl(width: 50);
+        c.AddControl(width: 50, editing: true);
     };
 
     protected override async Task OnParametersSetAsync()
     {
         _gridClient = new GridClientBuilder<Client>(Fields)
             .WithStaticData(_clients)
+            .WithSettings(editing: true)
             .WithDimensions("100%", "500px")
             .Build();
         _task = Task.CompletedTask;
         await _task;
+    }
+
+    private void WriteLine(RowEventArgs args)
+    {
+        Console.WriteLine($"Write Line: RowIndex={args.ItemIndex}; Item={args.Item}");
     }
 }
