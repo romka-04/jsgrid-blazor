@@ -8,6 +8,8 @@
 
 @if (_task.IsCompleted)
 {
+    <button class="btn btn-primary" @onclick="AddAge">Add Age</button>
+    <br/>
     <JsGridBlazor T="Client"
                   Value="_gridClient"
                   RowClick="RowClick"
@@ -76,5 +78,11 @@ else
     {
         //args.CancelUpdate();
         Console.WriteLine($"On Item Editing: RowIndex={args.ItemIndex}; Item={args.Item}");
+    }
+
+    private void AddAge()
+    {
+        _gridClient.Values[0].Age++;
+        Console.WriteLine($"age:{_gridClient.Values[0].Age}");
     }
 }

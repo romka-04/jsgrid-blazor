@@ -1,13 +1,31 @@
-﻿namespace JsGrid.Blazor.ComponentsLibrary
+﻿using System;
+using System.Collections.Generic;
+
+namespace JsGrid.Blazor.ComponentsLibrary
 {
     public interface IGridClient<T>
     {
-        public JsGridSettings Settings { get; set; }
+        public IList<T> Values { get; }
+        public JsGridSettings Settings { get; }
     }
 
     class GridClient<T>
         : IGridClient<T>
     {
-        public JsGridSettings Settings { get; set; }
+        private readonly GridClientBuilder<T> _builder;
+        private JsGridSettings _settings;
+
+        public IList<T> Values => _builder.Data;
+
+        public JsGridSettings Settings
+        {
+            get { return _settings ??= _builder.BuildJsGridSettings(); }
+        }
+
+        public GridClient(GridClientBuilder<T> builder)
+        {
+            _builder = builder
+                ?? throw new ArgumentNullException(nameof(builder));
+        }
     }
 }

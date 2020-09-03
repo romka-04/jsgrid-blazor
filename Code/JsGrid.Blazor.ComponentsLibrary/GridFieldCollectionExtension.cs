@@ -142,7 +142,7 @@ namespace JsGrid.Blazor.ComponentsLibrary
             if (null == constraint) throw new ArgumentNullException(nameof(constraint));
 
             var member = (MemberExpression)constraint.Body;
-            return member.Member.Name;
+            return member.Member.Name.ToCamelCase();
         }
     }
 }

@@ -33,24 +33,26 @@ namespace JsGrid.Blazor.ComponentsLibrary
             return collection;
         }
 
+        public List<T> Data => _data;
+
         public IGridClient<T> Build()
         {
-            var settings = new JsGridSettings
+            return new GridClient<T>(this);
+        }
+
+        public JsGridSettings BuildJsGridSettings()
+        {
+            return new JsGridSettings
             {
                 Inserting = _inserting,
                 Editing = _editing,
                 Sorting = _sorting,
                 Paging = _paging,
                 Fields = _fields.ToArray(),
-                Data   = BuildData(),
-                Width  = _width,
+                Data = _data,
+                Width = _width,
                 Height = _height
             };
-            var gridClient = new GridClient<T>
-            {
-                Settings = settings
-            };
-            return gridClient;
         }
 
         private object BuildData()
