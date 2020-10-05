@@ -5,6 +5,9 @@ window.jsGridWrapper = {
             throw new Error('No element with ID ' + elementId);
         }
         console.log('settings', settings);
+
+        var $selectedLastRow = null;
+
         $(elem).jsGrid({
             width: settings.width,
             height: settings.height,
@@ -34,6 +37,11 @@ window.jsGridWrapper = {
             },
             rowClick: function (args) {
                 dotnetHelper.invokeMethodAsync('RowClickAsync', args.item, args.itemIndex);
+                if (null != $selectedLastRow) {
+                    $selectedLastRow.removeClass('highlight-light');
+                }
+                $selectedLastRow = $(elem).jsGrid("rowByItem", args.item);
+                $selectedLastRow.addClass('highlight-light');
             },
             rowDoubleClick: function(args) {
                 dotnetHelper.invokeMethodAsync('RowDoubleClickAsync', args.item, args.itemIndex);

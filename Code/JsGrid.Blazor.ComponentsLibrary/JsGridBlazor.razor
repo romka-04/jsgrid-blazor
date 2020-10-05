@@ -57,4 +57,9 @@
         Task.WaitAll(task);
         return eventArgs.Cancel;
     }
+
+    public async Task<object> RowByItem(object item)
+    {
+        var element = await js.InvokeAsync<object>("jsGridWrapper.rowByItem", item);
+    }
 }
