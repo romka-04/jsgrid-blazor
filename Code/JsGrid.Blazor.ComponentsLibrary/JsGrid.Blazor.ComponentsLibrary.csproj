@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <RazorLangVersion>3.0</RazorLangVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Version>1.0.1</Version>
+    <Version>1.0.3-alpha</Version>
     <Authors>Roman Chernobrovkin</Authors>
     <Company />
     <Product>JsGrid.Blazor</Product>
@@ -16,8 +16,9 @@
     <PackageTags>jsgrid;grid;blazor</PackageTags>
     <PackageReleaseNotes>- add several grid events such as OnRowClick, OnItemUpdating etc;
 - minor bugfixes</PackageReleaseNotes>
-    <FileVersion>1.0.1.2</FileVersion>
+    <FileVersion>1.0.3.1</FileVersion>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
